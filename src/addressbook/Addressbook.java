@@ -7,12 +7,15 @@ package addressbook;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+//import javafx.geometry.Insets;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.control.TextField;
+//import javafx.scene.layout.HBox;
 
 /**
  *
@@ -24,38 +27,28 @@ public class Addressbook extends Application {
     public void start(Stage primaryStage) {
         
         //The root is the main layout
-        VBox root = new VBox();
-        Label nameLabel = new Label("Nimi");
-        TextField nameField = new TextField();
-        Label addressLabel = new Label("Osoite");
-        TextField addressField = new TextField();
-        Label phoneLabel = new Label("Puhelin");
-        TextField phoneField = new TextField();
-        phoneField.setMaxWidth(110);
+        HBox root = new HBox();
+        VBox leftLayout = new VBox();
         
-        //Do layout for textField components
-        VBox textFieldLayout = new VBox();
-        textFieldLayout.getChildren().add(nameLabel);
-        textFieldLayout.getChildren().add(nameField);
-        textFieldLayout.getChildren().add(addressLabel);
-        textFieldLayout.getChildren().add(addressField);
-        textFieldLayout.getChildren().add(phoneLabel);
-        textFieldLayout.getChildren().add(phoneField);
-        textFieldLayout.setStyle("-fx-padding:10;-fx-spacing:10");
+        TextArea users = new TextArea();
+        users.setStyle("-fx-max-width:200;-fx-max-height:200;-fx-spacing:10");
+        TextFieldsPartial partial = new TextFieldsPartial();
+        leftLayout.getChildren().add(partial);
+        leftLayout.getChildren().add(new ButtonPartial(users,partial));
         
-        Button saveButton = new Button("Save");
-        Button closeButton = new Button("Close");
+        root.getChildren().add(leftLayout);
+        root.getChildren().add(users);
+        Scene scene = new Scene(root, 400, 400);
+        /*
+        //textFieldLayoutille tehty oma luokka TextFieldsPartial joka perii VBox-luokan (layoutin)
+        root.getChildren().add(new TextFieldsPartial()); 
+        //buttonLayoutille tehty oma luokka ButtonPartial joka perii HBox-luokan (layoutin)
+        root.getChildren().add(new ButtonPartial());
         
-        HBox buttonLayout = new HBox();
-        buttonLayout.getChildren().add(saveButton);
-        buttonLayout.getChildren().add(closeButton);
-        buttonLayout.setStyle("-fx-padding:10;-fx-spacing:10");
+        root.getChildren().add(users);
         
-        root.getChildren().add(textFieldLayout);
-        root.getChildren().add(buttonLayout);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
+        Scene scene = new Scene(root, 300, 400);
+        */
         primaryStage.setTitle("Idea");
         primaryStage.setScene(scene);
         primaryStage.show();
